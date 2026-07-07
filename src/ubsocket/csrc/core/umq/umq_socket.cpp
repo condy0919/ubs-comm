@@ -293,6 +293,7 @@ void UmqSocket::UnbindAndFlushRemoteUmq(const SocketPtr &sock)
         UBS_VLOG_ERR("[UMQ_API] umq_unbind() failed, local umq: %llu, ret: %d\n",
                      static_cast<unsigned long long>(umq_handle_), ret);
     }
+    umq_is_bind_remote_ = false;
     tx_.GetTxOps()->FlushTx(sock);
 
     GlobalSetting::UBS_ENABLE_SHARE_JFR ? FlushRxQueue() : rx_.GetRxOps()->FlushRx(sock);
