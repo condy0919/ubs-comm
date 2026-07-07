@@ -31,7 +31,11 @@ Result UmqSocket::Initialize() noexcept
     return UBS_OK;
 }
 
-void UmqSocket::UnInitialize() noexcept {}
+void UmqSocket::UnInitialize() noexcept
+{
+    UnbindAndFlushRemoteUmq(this);
+    DestroyLocalUmq();
+}
 
 Result UmqSocket::CreateLocalUmq(const umq_eid_t *conn_eid, umq_used_ports_t &used_ports, umq_topo_type_t &topo_type)
 {

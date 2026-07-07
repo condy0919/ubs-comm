@@ -47,7 +47,11 @@ public:
     {
         mutex_ = LockRegistry::LOCK_OPS.create(LT_EXCLUSIVE);
     }
-    ~UmqSocket() override = default;
+
+    ~UmqSocket() override
+    {
+        UnInitialize();
+    }
 
     Result Initialize() noexcept override;
     void UnInitialize() noexcept override;
